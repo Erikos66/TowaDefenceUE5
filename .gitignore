@@ -1,0 +1,88 @@
+# Ignore Visual Studio files
+*.sln
+*.VC.db
+*.VC.opendb
+.vs/
+
+# Ignore Rider IDE files
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Ignore Unreal Engine auto-generated files
+*.opensdf
+*.suo
+*.user
+*.userprefs
+*.log
+*.t3d
+*.old
+*.pyc
+*.pyo
+*.pdb
+
+# Ignore Unreal Engine-specific files and folders
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+Build/Android
+Build/IOS
+Build/TVOS
+
+# Ignore platform-specific build files
+*.apk
+*.ipa
+*.app
+*.dSYM
+*.exe
+*.dll
+*.lib
+*.obj
+*.bat
+*.log
+
+# Ignore macOS files
+.DS_Store
+
+# Ignore build outputs
+*.manifest
+*.module
+*.sym
+*.pch
+*.idb
+*.opendb
+
+# Ignore Unreal Engine config files
+Config/DefaultEditor.ini
+Config/DefaultEditorPerProjectUserSettings.ini
+Config/DefaultEngine.ini
+Config/DefaultGame.ini
+Config/DefaultInput.ini
+Config/DefaultScalability.ini
+Config/DefaultEditorSettings.ini
+
+# Ignore UProjectUserSettings
+*.uprojectdirs
+*.uprojectuser
+
+# Ignore auto-saved files and backups
+Backup/
+Autosaves/
+
+# Ignore crash reports and logs
+CrashReports/
+*.dmp
+
+# Ignore object files and temporary files
+*.tmp
+*.temp
+
+# Ignore local project settings
+Saved/Logs/
+Saved/Config/
+Saved/Cooked/
+
+# Ignore other temporary and build-related files
+Thumbs.db
+backup/
