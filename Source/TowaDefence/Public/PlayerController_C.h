@@ -16,5 +16,5 @@ public:
 
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
-	UInputMappingContext* IMC_PlayerControls; // Assign this in the editor or during initialization
+	UInputMappingContext* IMC_Selection; // Assign this in the editor or during initialization
 };

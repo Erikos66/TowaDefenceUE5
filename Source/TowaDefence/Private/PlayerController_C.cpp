@@ -6,7 +6,7 @@ void AMyPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// Ensure we have a valid LocalPlayer.IMC_PlayerControls
+	// Ensure we have a valid LocalPlayer.IMC_Selection
 	ULocalPlayer* LocalPlayer = GetLocalPlayer();
 	if (!LocalPlayer)
 	{
@@ -23,7 +23,7 @@ void AMyPlayerController::BeginPlay()
 	}
 
 	// Ensure we have a valid mapping context.
-	if (!IMC_PlayerControls)
+	if (!IMC_Selection)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("No IMC Assigned!"));
 		return;
@@ -31,5 +31,5 @@ void AMyPlayerController::BeginPlay()
 
 	// Add the mapping context with a specified priority (0 in this example).
 	int32 Priority = 0;
-	Subsystem->AddMappingContext(IMC_PlayerControls, Priority);
+	Subsystem->AddMappingContext(IMC_Selection, Priority);
 }
