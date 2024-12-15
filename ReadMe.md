@@ -21,6 +21,11 @@
 
 - **Levels**
 
+- **Energy For Currency**
+ - Base produces enery at the end of each wave
+ - Passive energy generation towers that require user input to collect from
+ - Active energy generation towers that gain energy when an enemy dies within it's range
+
 ---
 
 ## Core Systems
