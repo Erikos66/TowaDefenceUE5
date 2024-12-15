@@ -1,46 +1,60 @@
-GDD?
+# Game Design Document (GDD)
 
-Ideas;
+---
 
-Buff Turrets
-Multiple Til'd Turrets
-Boss Enemies
-Arc Turrets
-Art Turrets?
+## Ideas
 
+- **Buff Turrets**
+- **Multiple Til'd Turrets**
+- **Boss Enemies**
+- **Arc Turrets**
+- **Art Turrets?**
 
+---
 
-Gameplay Experience;
+## Gameplay Experience
 
-How to show enemy health - Size/Colour/HealthBar? {BODY DISMEMBERMENT?}
+- **Enemy Health Display**
+  - Options: Size, Colour, Health Bar
+  - Possible Feature: Body Dismemberment?
 
-Isometric Camera View and Levels
+- **Camera View**
+  - Isometric Camera
 
+- **Levels**
 
+---
 
-Core Systems;
+## Core Systems
 
-Turrets and placing Turrets
+- **Turrets**
+  - Placing Turrets
+  - Interface to buy Turrets
 
-Enemies moving towards a base
+- **Enemies**
+  - Enemies move towards a base
+  - Fixed enemy type and number per wave (total 10 waves)
 
-A base
+- **Base**
+  - Central structure to defend
 
-Interface to buy Turrets
+- **Wave System**
+  - In-between wave timer
+  - Waves spawn at timed intervals
+  - Ability to place and sell towers during the timer
 
-Inbetween wave timer, waves spawn at time intervals, can still place and sell towers.
+- **Map**
+  - Hextile map layout
 
-Hextile map
+- **Game States**
+  - **Main Menu**
+  - **Win/Lose Conditions**:
+    - Victory: Survive all waves
+    - Defeat: Base destroyed or failed to survive all waves
 
-Main Menu
+---
 
-Win and Lose Condition weather you survived all or not.
+## Late Systems
 
-Fixed enemy type and number per wave, total 10 waves.
-
-
-
-
-Late Systems;
-
-Endless gamemode where enemies spawn based on % rather than fixed.
+- **Endless Game Mode**
+  - Enemies spawn based on percentages rather than fixed numbers
