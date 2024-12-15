@@ -5,7 +5,7 @@
 ## Ideas
 
 - **Buff Turrets**
-- **Multiple Til'd Turrets**
+- **Multiple Tile'd Turrets**
 - **Boss Enemies**
 - **Arc Turrets**
 - **Art Turrets?**
