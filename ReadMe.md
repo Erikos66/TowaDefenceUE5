@@ -1,7 +1,5 @@
 # Game Design Document (GDD)
 
----
-
 ## Ideas
 
 - **Buff Turrets**
