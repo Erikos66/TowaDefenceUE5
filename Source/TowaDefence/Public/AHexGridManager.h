@@ -31,11 +31,20 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Hex Grid")
 	float Offset = 0.0f;
 
-	void GenerateHexGrid();
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Hex Grid")
+	float BaseHexRadius = 100.0f;
 
 private:
-	TArray<UChildActorComponent*> HexTileComponents;
+	TArray<AActor*> HexTileActors;
 
-	FVector CalculateHexPosition(int32 Q, int32 R) const;
+	void GenerateHexGrid();
 	void ClearHexGrid();
+	FVector CalculateHexPosition(int32 Q, int32 R) const;
+
+	float PreviousScale = 1.0f;
+	float PreviousOffset = 0.0f;
+	int32 PreviousGridWidth = 0;
+	int32 PreviousGridHeight = 0;
+	
+	bool HasGridParametersChanged() const;
 };
