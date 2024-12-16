@@ -14,8 +14,24 @@ void AHexGridManager::OnConstruction(const FTransform& Transform)
 {
 	Super::OnConstruction(Transform);
 
-	GenerateHexGrid();
+	// Check if tiles already exist; regenerate only if necessary
+	if (HexTileComponents.Num() == 0)
+	{
+		GenerateHexGrid();
+	}
+	else
+	{
+		// Move the entire grid with the manager
+		for (UChildActorComponent* TileComponent : HexTileComponents)
+		{
+			if (TileComponent)
+			{
+				TileComponent->SetWorldLocation(GetActorLocation() + TileComponent->GetRelativeLocation());
+			}
+		}
+	}
 }
+
 
 void AHexGridManager::GenerateHexGrid()
 {
