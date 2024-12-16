@@ -13,12 +13,11 @@ public:
 	AHexGridManager();
 
 protected:
-	virtual void BeginPlay() override;
+	virtual void OnConstruction(const FTransform& Transform) override;
 
 public:
-	// Variables for grid generation
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Hex Grid")
-	TSubclassOf<class AHexTile> HexTileClass;
+	TSubclassOf<class AActor> HexTileClass;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Hex Grid")
 	int32 GridWidth = 10;
@@ -30,18 +29,13 @@ public:
 	float Scale = 1.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Hex Grid")
-	float Offset = 10.0f;
+	float Offset = 0.0f;
 
-	// Overrides
-	virtual void OnConstruction(const FTransform& Transform) override;
-
-	// Generate hex grid
 	void GenerateHexGrid();
 
 private:
-	TArray<AHexTile*> HexTiles;
+	TArray<UChildActorComponent*> HexTileComponents;
 
 	FVector CalculateHexPosition(int32 Q, int32 R) const;
-
-	void ClearExistingTiles();
+	void ClearHexGrid();
 };

@@ -1,77 +1,87 @@
 ﻿#include "AHexGridManager.h"
-#include "AHexTile.h"
+#include "Components/ChildActorComponent.h"
 
 AHexGridManager::AHexGridManager()
 {
 	PrimaryActorTick.bCanEverTick = false;
-}
 
-void AHexGridManager::BeginPlay()
-{
-	Super::BeginPlay();
-	GenerateHexGrid();
+	// Create a default root component to allow movement
+	USceneComponent* RootComp = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
+	RootComponent = RootComp;
 }
 
 void AHexGridManager::OnConstruction(const FTransform& Transform)
 {
 	Super::OnConstruction(Transform);
 
-	// Generate grid in editor
 	GenerateHexGrid();
 }
 
 void AHexGridManager::GenerateHexGrid()
 {
+	ClearHexGrid(); // Clear existing tiles
+
 	if (!HexTileClass) return;
 
-	// Clear any previously spawned tiles
-	ClearExistingTiles();
+	FVector GridOrigin = GetActorLocation(); // Starting position of the grid manager
 
 	for (int32 Q = 0; Q < GridWidth; ++Q)
 	{
 		for (int32 R = 0; R < GridHeight; ++R)
 		{
-			FVector Position = CalculateHexPosition(Q, R);
+			FVector LocalPosition = CalculateHexPosition(Q, R);
+			FVector WorldPosition = GridOrigin + LocalPosition;
 
-			// Spawn the hex tile
-			AHexTile* NewTile = GetWorld()->SpawnActor<AHexTile>(HexTileClass, Position, FRotator::ZeroRotator);
-			if (NewTile)
+			// Create a new Child Actor Component
+			UChildActorComponent* TileComponent = NewObject<UChildActorComponent>(this);
+			if (TileComponent)
 			{
-				// Set the axial coordinates
-				NewTile->AxialCoordinates = FVector2D(Q, R);
+				TileComponent->SetChildActorClass(HexTileClass);
+				TileComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepWorldTransform);
 
-				// Apply the scale to the hex tile's mesh
-				NewTile->SetActorScale3D(FVector(Scale));
+				TileComponent->RegisterComponent();
+				TileComponent->SetWorldLocation(WorldPosition);
 
-				HexTiles.Add(NewTile);
+				// Rotate the tile 30 degrees on the Z axis to align properly
+				TileComponent->SetWorldRotation(FRotator(0.0f, 30.0f, 0.0f));
+
+				TileComponent->SetRelativeScale3D(FVector(Scale));
+
+				HexTileComponents.Add(TileComponent);
 			}
 		}
 	}
 }
 
+
+
+
 FVector AHexGridManager::CalculateHexPosition(int32 Q, int32 R) const
 {
-	const float BaseHexWidth = 100.f;  // Base size of your hex mesh width
-	const float BaseHexHeight = 86.6f; // Base size of your hex mesh height
+	const float HexSize = 100.0f; // Base hex radius (distance center to edge)
+	const float Padding = Offset; // Extra spacing between tiles
 
-	// Apply scale and offset
-	const float HexWidth = BaseHexWidth * Scale + Offset;
-	const float HexHeight = BaseHexHeight * Scale + Offset;
+	// Calculate dimensions of the hex tile with padding
+	const float HexWidth = (HexSize * 2.0f) + Padding; // Width: 2 * radius + padding
+	const float HexHeight = (FMath::Sqrt(3.0f) * HexSize) + Padding; // Height with padding
 
-	float X = HexWidth * 0.75f * Q;
-	float Y = HexHeight * (R + 0.5f * (Q % 2));
-	return FVector(X, Y, 0.f);
+	// X and Y positions for axial coordinates
+	float X = Q * HexWidth * 0.75f;
+	float Y = R * HexHeight + ((Q % 2 == 0) ? 0.0f : HexHeight / 2.0f);
+
+	return FVector(X, Y, 0.0f);
 }
 
-void AHexGridManager::ClearExistingTiles()
+
+void AHexGridManager::ClearHexGrid()
 {
-	for (AHexTile* Tile : HexTiles)
+	for (UChildActorComponent* Component : HexTileComponents)
 	{
-		if (Tile && !Tile->IsPendingKillPending())
+		if (Component)
 		{
-			Tile->Destroy();
+			Component->DestroyComponent();
 		}
 	}
 
-	HexTiles.Empty();
+	HexTileComponents.Empty();
 }
