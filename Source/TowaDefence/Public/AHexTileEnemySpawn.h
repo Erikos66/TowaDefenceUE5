@@ -1,26 +1,25 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
-#include "AEnemySpawnPoint.generated.h"
+#include "AHexTile.h"
+#include "AHexTileEnemySpawn.generated.h"
 
 UCLASS()
-class TOWADEFENCE_API AAEnemySpawnPoint : public AActor
+class TOWADEFENCE_API AAHexTileEnemySpawn : public AHexTile
 {
 	GENERATED_BODY()
-	
-public:	
+
+public:
 	// Sets default values for this actor's properties
-	AAEnemySpawnPoint();
+	AAHexTileEnemySpawn();
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
 };
