@@ -45,7 +45,7 @@ private:
 	
 	void GenerateHexGrid();
 
-	FVector CalculateHexPosition(int32 Q, int32 R) const;
+	static FVector CalculateHexPosition(int32 Q, int32 R, float HexWidth, float HexHeight);
 
 	
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
