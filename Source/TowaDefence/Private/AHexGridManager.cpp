@@ -6,6 +6,8 @@
 // GENERAL FUNCTIONS
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+class AHexTile;
+
 AHexGridManager::AHexGridManager()
 {
     PrimaryActorTick.bCanEverTick = false;
@@ -74,6 +76,38 @@ FVector AHexGridManager::CalculateHexPosition(int32 const Q, int32 const R, floa
     return FVector(X, Y, 0.0f);
 }
 
+TArray<UChildActorComponent*> AHexGridManager::GetEdgeTiles() const
+{
+    TArray<UChildActorComponent*> EdgeTiles;
 
+    EdgeTiles.Empty();
 
+    for (int32 Q = 0; Q < GridWidth; ++Q)
+    {
+        for (int32 R = 0; R < GridHeight; ++R)
+        {
+            if (Q == 0 || Q == GridWidth - 1 || R == 0 || R == GridHeight - 1)
+            {
+                if (const int32 Index = Q * GridHeight + R; HexTileComponents.IsValidIndex(Index))
+                {
+                    EdgeTiles.Add(HexTileComponents[Index].Get());
+                }
+            }
+        }
+    }
 
+    return EdgeTiles;
+}
+
+void AHexGridManager::GenerateEnemySpawnPoints() const
+{
+    TArray<UChildActorComponent*> EdgeTiles = GetEdgeTiles();
+    TArray<UChildActorComponent*> ListOfEnemySpawns;
+
+    for (int32 i = 0; i < NumEnemySpawnPoints && EdgeTiles.Num() > 0; ++i)
+    {
+        const int32 RandomIndex = FMath::RandRange(0, EdgeTiles.Num() - 1);
+        ListOfEnemySpawns.Add(EdgeTiles[RandomIndex]);
+        EdgeTiles.RemoveAt(RandomIndex);
+    }
+}

@@ -25,6 +25,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FVector2D AxialCoordinates;
 
-	UFUNCTION(BlueprintCallable)
-	void HighlightTile(bool bIsHighlighted);
+	bool bIsEnemySpawnPoint = false;
+
+	bool bIsBasePoint = false;
+
+	bool bIsPathPoint = false;
 };

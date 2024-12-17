@@ -14,12 +14,3 @@ void AHexTile::BeginPlay()
 {
 	Super::BeginPlay();
 }
-
-void AHexTile::HighlightTile(bool bIsHighlighted)
-{
-
-	// Not entirely sure what this does, but it will be interesting to find out.
-	//TODO: Find out what this does.
-	TileMesh->SetRenderCustomDepth(bIsHighlighted);
-	
-}
