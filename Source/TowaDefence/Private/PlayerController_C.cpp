@@ -7,7 +7,7 @@ void AMyPlayerController::BeginPlay()
 	Super::BeginPlay();
 
 	// Ensure we have a valid LocalPlayer.IMC_Selection
-	ULocalPlayer* LocalPlayer = GetLocalPlayer();
+	const ULocalPlayer* LocalPlayer = GetLocalPlayer();
 	if (!LocalPlayer)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("No LocalPlayer found for this controller."));
@@ -30,6 +30,6 @@ void AMyPlayerController::BeginPlay()
 	}
 
 	// Add the mapping context with a specified priority (0 in this example).
-	int32 Priority = 0;
+	const int32 Priority = 0;
 	Subsystem->AddMappingContext(IMC_Selection, Priority);
 }

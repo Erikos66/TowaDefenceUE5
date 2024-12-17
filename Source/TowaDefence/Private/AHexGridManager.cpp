@@ -9,8 +9,7 @@
 AHexGridManager::AHexGridManager()
 {
     PrimaryActorTick.bCanEverTick = false;
-
-    // Add a root component for the actor
+    
     USceneComponent* RootComp = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
     RootComponent = RootComp;
 }
@@ -27,7 +26,6 @@ void AHexGridManager::OnConstruction(const FTransform& Transform)
 
 void AHexGridManager::GenerateHexGrid()
 {
-    // Clear existing child components
     TArray<USceneComponent*> LocalChildren;
     RootComponent->GetChildrenComponents(true, LocalChildren);
 
@@ -40,9 +38,8 @@ void AHexGridManager::GenerateHexGrid()
     }
     HexTileComponents.Empty();
 
-    FVector GridOrigin = GetActorLocation();
-
-    // Pre-calculate HexWidth and HexHeight for efficiency
+    const FVector GridOrigin = GetActorLocation();
+    
     const float ScaledRadius = BaseHexRadius * Scale;
     const float HexWidth = ScaledRadius * 2.0f + Offset;
     const float HexHeight = FMath::Sqrt(3.0f) * ScaledRadius + Offset;
@@ -54,8 +51,7 @@ void AHexGridManager::GenerateHexGrid()
             FVector LocalPosition = CalculateHexPosition(Q, R, HexWidth, HexHeight);
             FVector WorldPosition = GridOrigin + LocalPosition;
 
-            UChildActorComponent* NewChildActor = NewObject<UChildActorComponent>(this);
-            if (NewChildActor)
+            if (UChildActorComponent* NewChildActor = NewObject<UChildActorComponent>(this))
             {
                 NewChildActor->SetChildActorClass(HexTileClass);
                 NewChildActor->RegisterComponent();
@@ -72,8 +68,8 @@ void AHexGridManager::GenerateHexGrid()
 
 FVector AHexGridManager::CalculateHexPosition(int32 const Q, int32 const R, float const HexWidth, float const HexHeight)
 {
-    float X = Q * HexWidth * 0.75f; // Horizontal spacing with overlap
-    float Y = R * HexHeight + ((Q % 2 == 0) ? 0.0f : HexHeight / 2.0f); // Vertical staggering for odd rows
+    const float X = Q * HexWidth * 0.75f;
+    const float Y = R * HexHeight + ((Q % 2 == 0) ? 0.0f : HexHeight / 2.0f);
 
     return FVector(X, Y, 0.0f);
 }

@@ -12,7 +12,7 @@ class TOWADEFENCE_API AHexGridManager : public AActor
 protected:
 
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	// PROPERITES & VARIABLES
+	// PROPERTIES & VARIABLES
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Hex Grid")
@@ -49,7 +49,7 @@ private:
 
 	
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	// PROPERITES & VARIABLES
+	// PROPERTIES & VARIABLES
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	
 	TArray<TWeakObjectPtr<UChildActorComponent>> HexTileComponents;
