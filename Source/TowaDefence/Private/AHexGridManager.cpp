@@ -2,6 +2,37 @@
 #include "Engine/World.h"
 #include "Components/SceneComponent.h"
 
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// GENERAL FUNCTIONS
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#if WITH_EDITOR
+void AHexGridManager::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
+{
+    Super::PostEditChangeProperty(PropertyChangedEvent);
+
+    // Regenerate the grid unconditionally
+    ClearHexGrid();
+    GenerateHexGrid();
+}
+#endif
+
+void AHexGridManager::Destroyed()
+{
+    Super::Destroyed();
+
+    // Destroy all spawned hex tile actors
+    for (AActor* Tile : HexTileActors)
+    {
+        if (IsValid(Tile)) // Safe check for a valid, not-destroyed actor
+        {
+            Tile->Destroy();
+        }
+    }
+
+    HexTileActors.Empty();
+}
+
 AHexGridManager::AHexGridManager()
 {
     PrimaryActorTick.bCanEverTick = false;
@@ -10,6 +41,10 @@ AHexGridManager::AHexGridManager()
     USceneComponent* RootComp = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
     RootComponent = RootComp;
 }
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// GRID MANAGEMENT
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 void AHexGridManager::OnConstruction(const FTransform& Transform)
 {
@@ -60,7 +95,7 @@ void AHexGridManager::ClearHexGrid()
     // Destroy all existing tile actors
     for (AActor* Tile : HexTileActors)
     {
-        if (Tile && !Tile->IsPendingKillPending())
+        if (IsValid(Tile)) // Replaced IsPendingKillPending with isValid as it is the preferred method.
         {
             Tile->Destroy();
         }
