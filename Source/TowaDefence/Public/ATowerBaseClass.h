@@ -4,16 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "TowerBaseClass_C.generated.h"
+#include "ATowerBaseClass.generated.h"
 
 UCLASS()
-class TOWADEFENCE_API ATowerBaseClass_C : public AActor
+class TOWADEFENCE_API AATowerBaseClass : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	ATowerBaseClass_C();
+	AATowerBaseClass();
 
 protected:
 	// Called when the game starts or when spawned

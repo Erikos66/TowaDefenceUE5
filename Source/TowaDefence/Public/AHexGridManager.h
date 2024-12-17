@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "AHexTile.h"
 #include "AHexGridManager.generated.h"
 
 UCLASS()
@@ -12,9 +13,9 @@ class TOWADEFENCE_API AHexGridManager : public AActor
 protected:
 
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	// PROPERITES & VARIABLES
+	// PROPERTIES & VARIABLES
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Hex Grid")
 	TSubclassOf<class AActor> HexTileClass;
 
@@ -33,6 +34,9 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Hex Grid")
 	float BaseHexRadius = 50.0f;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Hex Grid")
+	int32 NumEnemySpawnPoints = 4;
+
 private:
 
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -45,11 +49,15 @@ private:
 	
 	void GenerateHexGrid();
 
-	FVector CalculateHexPosition(int32 Q, int32 R) const;
-
+	static FVector CalculateHexPosition(int32 Q, int32 R, float HexWidth, float HexHeight);
 	
+	TArray<UChildActorComponent*> GetEdgeTiles() const;
+	
+	void GenerateEnemySpawnPoints() const;
+
+
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	// PROPERITES & VARIABLES
+	// PROPERTIES & VARIABLES
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	
 	TArray<TWeakObjectPtr<UChildActorComponent>> HexTileComponents;

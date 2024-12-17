@@ -1,13 +1,8 @@
 ﻿#include "AHexTile.h"
-#include "Components/StaticMeshComponent.h"
 
 AHexTile::AHexTile()
 {
 	PrimaryActorTick.bCanEverTick = false;
-
-	// Hopefully making this in C++ will be easier to read and understand over the blueprint version.
-	TileMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("TileMesh"));
-	RootComponent = TileMesh;
 }
 
 void AHexTile::BeginPlay()
@@ -15,11 +10,12 @@ void AHexTile::BeginPlay()
 	Super::BeginPlay();
 }
 
-void AHexTile::HighlightTile(bool bIsHighlighted)
+void AHexTile::Tick(float DeltaTime)
 {
+	Super::Tick(DeltaTime);
+}
 
-	// Not entirely sure what this does, but it will be interesting to find out.
-	//TODO: Find out what this does.
-	TileMesh->SetRenderCustomDepth(bIsHighlighted);
-	
+void AHexTile::OnTileSelected()
+{
+	UE_LOG(LogTemp, Log, TEXT("Base Hex Tile Selected"));
 }

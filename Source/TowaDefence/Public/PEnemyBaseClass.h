@@ -4,16 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
-#include "EnemyBaseClass_C.generated.h"
+#include "PEnemyBaseClass.generated.h"
 
 UCLASS()
-class TOWADEFENCE_API AEnemyBaseClass_C : public APawn
+class TOWADEFENCE_API APEnemyBaseClass : public APawn
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this pawn's properties
-	AEnemyBaseClass_C();
+	APEnemyBaseClass();
 
 protected:
 	// Called when the game starts or when spawned

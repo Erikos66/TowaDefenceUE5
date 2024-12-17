@@ -1,10 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "EnemyBaseClass_C.h"
+#include "PEnemyBaseClass.h"
 
 // Sets default values
-AEnemyBaseClass_C::AEnemyBaseClass_C()
+APEnemyBaseClass::APEnemyBaseClass()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -12,21 +12,21 @@ AEnemyBaseClass_C::AEnemyBaseClass_C()
 }
 
 // Called when the game starts or when spawned
-void AEnemyBaseClass_C::BeginPlay()
+void APEnemyBaseClass::BeginPlay()
 {
 	Super::BeginPlay();
 	
 }
 
 // Called every frame
-void AEnemyBaseClass_C::Tick(float DeltaTime)
+void APEnemyBaseClass::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
 }
 
 // Called to bind functionality to input
-void AEnemyBaseClass_C::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+void APEnemyBaseClass::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 

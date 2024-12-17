@@ -4,16 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "EnemySpawnPoint_C.generated.h"
+#include "AEnemySpawnPoint.generated.h"
 
 UCLASS()
-class TOWADEFENCE_API AEnemySpawnPoint_C : public AActor
+class TOWADEFENCE_API AAEnemySpawnPoint : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AEnemySpawnPoint_C();
+	AAEnemySpawnPoint();
 
 protected:
 	// Called when the game starts or when spawned
