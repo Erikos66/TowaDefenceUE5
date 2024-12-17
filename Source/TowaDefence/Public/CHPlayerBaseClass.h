@@ -4,17 +4,17 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "PlayerCharacter_C.generated.h"
+#include "CHPlayerBaseClass.generated.h"
 
 
 UCLASS()
-class TOWADEFENCE_API APlayerCharacter_C : public ACharacter
+class TOWADEFENCE_API ACHPlayerBaseClass : public ACharacter
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this character's properties
-	APlayerCharacter_C();
+	ACHPlayerBaseClass();
 
 protected:
 	// Called when the game starts or when spawned

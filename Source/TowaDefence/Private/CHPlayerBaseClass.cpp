@@ -1,22 +1,22 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "PlayerCharacter_C.h"
+#include "CHPlayerBaseClass.h"
 
 // Sets default values
-APlayerCharacter_C::APlayerCharacter_C()
+ACHPlayerBaseClass::ACHPlayerBaseClass()
 {
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 }
-void APlayerCharacter_C::BeginPlay()
+void ACHPlayerBaseClass::BeginPlay()
 {
 	Super::BeginPlay();
 }
-void APlayerCharacter_C::Tick(float DeltaTime)
+void ACHPlayerBaseClass::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 }
-void APlayerCharacter_C::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+void ACHPlayerBaseClass::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 

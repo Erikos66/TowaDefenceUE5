@@ -1,10 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "EnemySpawnPoint_C.h"
+#include "AEnemySpawnPoint.h"
 
 // Sets default values
-AEnemySpawnPoint_C::AEnemySpawnPoint_C()
+AAEnemySpawnPoint::AAEnemySpawnPoint()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -12,14 +12,14 @@ AEnemySpawnPoint_C::AEnemySpawnPoint_C()
 }
 
 // Called when the game starts or when spawned
-void AEnemySpawnPoint_C::BeginPlay()
+void AAEnemySpawnPoint::BeginPlay()
 {
 	Super::BeginPlay();
 	
 }
 
 // Called every frame
-void AEnemySpawnPoint_C::Tick(float DeltaTime)
+void AAEnemySpawnPoint::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
