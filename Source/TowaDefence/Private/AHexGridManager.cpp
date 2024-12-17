@@ -49,19 +49,7 @@ AHexGridManager::AHexGridManager()
 void AHexGridManager::OnConstruction(const FTransform& Transform)
 {
     Super::OnConstruction(Transform);
-
-    // Only regenerate if parameters have changed
-    if (HasGridParametersChanged())
-    {
-        ClearHexGrid();
-        GenerateHexGrid();
-
-        // Update previous state
-        PreviousScale = Scale;
-        PreviousOffset = Offset;
-        PreviousGridWidth = GridWidth;
-        PreviousGridHeight = GridHeight;
-    }
+    GenerateHexGrid();
 }
 
 void AHexGridManager::GenerateHexGrid()
@@ -114,12 +102,4 @@ FVector AHexGridManager::CalculateHexPosition(int32 Q, int32 R) const
     float Y = R * HexHeight + ((Q % 2 == 0) ? 0.0f : HexHeight / 2.0f); // Vertical staggering for odd/even rows
 
     return FVector(X, Y, 0.0f);
-}
-
-bool AHexGridManager::HasGridParametersChanged() const
-{
-    return Scale != PreviousScale ||
-           Offset != PreviousOffset ||
-           GridWidth != PreviousGridWidth ||
-           GridHeight != PreviousGridHeight;
 }

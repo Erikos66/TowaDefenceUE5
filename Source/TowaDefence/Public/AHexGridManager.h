@@ -50,8 +50,6 @@ private:
 	void ClearHexGrid();
 
 	FVector CalculateHexPosition(int32 Q, int32 R) const;
-	
-	bool HasGridParametersChanged() const;
 
 #if WITH_EDITOR
 	virtual void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
