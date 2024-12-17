@@ -31,7 +31,7 @@ protected:
 	float Offset = 0.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Hex Grid")
-	float BaseHexRadius = 100.0f;
+	float BaseHexRadius = 50.0f;
 
 private:
 
@@ -42,25 +42,17 @@ private:
 	AHexGridManager();
 	
 	virtual void OnConstruction(const FTransform& Transform) override;
-
-	virtual void Destroyed() override;
 	
 	void GenerateHexGrid();
-	
-	void ClearHexGrid();
 
 	FVector CalculateHexPosition(int32 Q, int32 R) const;
-
-#if WITH_EDITOR
-	virtual void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
-#endif
 
 	
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	// PROPERITES & VARIABLES
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	
-	TArray<AActor*> HexTileActors;
+	TArray<TWeakObjectPtr<UChildActorComponent>> HexTileComponents;
 
 	float PreviousScale = 1.0f;
 	
