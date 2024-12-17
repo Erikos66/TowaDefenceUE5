@@ -6,33 +6,6 @@
 // GENERAL FUNCTIONS
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#if WITH_EDITOR
-void AHexGridManager::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
-{
-    Super::PostEditChangeProperty(PropertyChangedEvent);
-
-    // Regenerate the grid unconditionally
-    ClearHexGrid();
-    GenerateHexGrid();
-}
-#endif
-
-void AHexGridManager::Destroyed()
-{
-    Super::Destroyed();
-
-    // Destroy all spawned hex tile actors
-    for (AActor* Tile : HexTileActors)
-    {
-        if (IsValid(Tile)) // Safe check for a valid, not-destroyed actor
-        {
-            Tile->Destroy();
-        }
-    }
-
-    HexTileActors.Empty();
-}
-
 AHexGridManager::AHexGridManager()
 {
     PrimaryActorTick.bCanEverTick = false;
@@ -54,7 +27,18 @@ void AHexGridManager::OnConstruction(const FTransform& Transform)
 
 void AHexGridManager::GenerateHexGrid()
 {
-    if (!HexTileClass) return;
+    // Clear existing child components
+    TArray<USceneComponent*> LocalChildren;
+    RootComponent->GetChildrenComponents(true, LocalChildren);
+
+    for (USceneComponent* Child : LocalChildren)
+    {
+        if (UChildActorComponent* ChildActorComp = Cast<UChildActorComponent>(Child))
+        {
+            ChildActorComp->DestroyComponent();
+        }
+    }
+    HexTileComponents.Empty();
 
     FVector GridOrigin = GetActorLocation();
 
@@ -65,41 +49,34 @@ void AHexGridManager::GenerateHexGrid()
             FVector LocalPosition = CalculateHexPosition(Q, R);
             FVector WorldPosition = GridOrigin + LocalPosition;
 
-            // Spawn a new tile actor
-            AActor* NewTile = GetWorld()->SpawnActor<AActor>(HexTileClass, WorldPosition, FRotator(0.0f, 30.0f, 0.0f));
-            if (NewTile)
+            UChildActorComponent* NewChildActor = NewObject<UChildActorComponent>(this);
+            if (NewChildActor)
             {
-                NewTile->AttachToActor(this, FAttachmentTransformRules::KeepWorldTransform);
-                NewTile->SetActorScale3D(FVector(Scale));
-                HexTileActors.Add(NewTile);
-                NewTile->SetOwner(this);
+                NewChildActor->SetChildActorClass(HexTileClass);
+                NewChildActor->RegisterComponent();
+                NewChildActor->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepWorldTransform);
+                NewChildActor->SetRelativeLocation(WorldPosition - GridOrigin);
+                NewChildActor->SetRelativeRotation(FRotator(0.0f, 30.0f, 0.0f));
+                NewChildActor->SetRelativeScale3D(FVector(Scale, Scale, Scale));
+
+                HexTileComponents.Add(NewChildActor);
             }
         }
     }
 }
 
-void AHexGridManager::ClearHexGrid()
-{
-    // Destroy all existing tile actors
-    for (AActor* Tile : HexTileActors)
-    {
-        if (IsValid(Tile)) // Replaced IsPendingKillPending with isValid as it is the preferred method.
-        {
-            Tile->Destroy();
-        }
-    }
-
-    HexTileActors.Empty();
-}
-
 FVector AHexGridManager::CalculateHexPosition(int32 Q, int32 R) const
 {
-    const float HexWidth = (BaseHexRadius * 2.0f * Scale) + Offset; // Total width with scaling and padding
-    const float HexHeight = (FMath::Sqrt(3.0f) * BaseHexRadius * Scale) + Offset; // Total height with scaling and padding
+    const float ScaledRadius = BaseHexRadius * Scale; // Apply scale to the base radius
+    const float HexWidth = ScaledRadius * 2.0f + Offset; // Total width including padding
+    const float HexHeight = FMath::Sqrt(3.0f) * ScaledRadius + Offset; // Total height including padding
 
-    // Axial coordinate calculations
-    float X = Q * HexWidth * 0.75f; // Horizontal spacing with slight overlap
-    float Y = R * HexHeight + ((Q % 2 == 0) ? 0.0f : HexHeight / 2.0f); // Vertical staggering for odd/even rows
+    // Axial coordinate system to Cartesian (handles odd row staggering)
+    float X = Q * HexWidth * 0.75f; // Horizontal spacing with overlap
+    float Y = R * HexHeight + ((Q % 2 == 0) ? 0.0f : HexHeight / 2.0f); // Vertical staggering for odd rows
 
     return FVector(X, Y, 0.0f);
 }
+
+
+
