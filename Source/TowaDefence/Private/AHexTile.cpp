@@ -1,8 +1,12 @@
 ﻿#include "AHexTile.h"
+#include "Components/StaticMeshComponent.h"
 
 AHexTile::AHexTile()
 {
 	PrimaryActorTick.bCanEverTick = false;
+
+	HexMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("HexMesh"));
+	RootComponent = HexMesh;
 }
 
 void AHexTile::BeginPlay()
