@@ -8,7 +8,6 @@
 class UStaticMeshComponent;
 class USphereComponent;
 class UArrowComponent;
-class IIEEnemyMarker;
 
 UCLASS()
 class TOWADEFENCE_API AATower : public AActor

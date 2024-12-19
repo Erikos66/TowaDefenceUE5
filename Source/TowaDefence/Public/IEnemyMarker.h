@@ -1,25 +1,21 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
-
-#pragma once
+﻿#pragma once
 
 #include "CoreMinimal.h"
 #include "UObject/Interface.h"
 #include "IEnemyMarker.generated.h"
 
-// This class does not need to be modified.
-UINTERFACE()
-class UIEnemyMarker : public UInterface
+UINTERFACE(MinimalAPI)
+class UEnemyMarker : public UInterface
 {
 	GENERATED_BODY()
 };
 
-/**
- * 
- */
-class TOWADEFENCE_API IIEnemyMarker
+// Pure C++ interface
+class TOWADEFENCE_API IEnemyMarker
 {
 	GENERATED_BODY()
 
-	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
+	// Define any interface functions here
+	virtual void MarkAsEnemy() = 0;
 };
