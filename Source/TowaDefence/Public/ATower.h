@@ -39,20 +39,44 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tower")
 	UArrowComponent* ArrowComponent;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tower")
 	float CurrentHealth;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tower")
 	float MaxHealth;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tower")
 	float Damage;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tower")
 	float AttackSpeed;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tower")
 	float AttackRange;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tower")
 	float AttackTimer;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tower")
 	float RotationSpeed;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tower")
 	int32 CostValue;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tower")
 	int32 SellValue;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tower")
 	int32 UpgradeCost;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tower")
 	int32 CurrentLevel;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tower")
-	TArray<AActor*> TargetArray;
+	USoundBase* AttackSound;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Targeting")
+	TArray <AActor*> EnemiesInRange;
 	
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	// FUNCTIONS
@@ -63,5 +87,12 @@ protected:
 	virtual void BeginPlay() override;
 
 	virtual void Tick(float DeltaTime) override;
+
+	UFUNCTION()
+	void DetectionRangeOverlapStart(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep,const FHitResult& SweepResult);
+
+	UFUNCTION()
+	void DetectionRangeOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* 
+	OtherComp, int32 OtherBodyIndex);
 	
 };
