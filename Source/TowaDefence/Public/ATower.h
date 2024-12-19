@@ -40,37 +40,34 @@ protected:
 	UArrowComponent* ArrowComponent;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tower")
-	float CurrentHealth;
+	float CurrentHealth = 10.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tower")
-	float MaxHealth;
+	float MaxHealth = 10.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tower")
-	float Damage;
+	float Damage = 1.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tower")
-	float AttackSpeed;
+	float AttackSpeed = 1.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tower")
-	float AttackRange;
+	float AttackRange = 500.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tower")
-	float AttackTimer;
+	float RotationSpeed = 10.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tower")
-	float RotationSpeed;
+	int32 CostValue = 2;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tower")
-	int32 CostValue;
+	int32 SellValue = 1;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tower")
-	int32 SellValue;
+	int32 UpgradeCost = 5;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tower")
-	int32 UpgradeCost;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tower")
-	int32 CurrentLevel;
+	int32 CurrentLevel = 1;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tower")
 	USoundBase* AttackSound;
@@ -87,6 +84,8 @@ protected:
 	virtual void BeginPlay() override;
 
 	virtual void Tick(float DeltaTime) override;
+	
+	void RotateTowardsClosestEnemy();
 
 	UFUNCTION()
 	void DetectionRangeOverlapStart(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep,const FHitResult& SweepResult);
