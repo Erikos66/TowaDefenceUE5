@@ -1,11 +1,12 @@
 ﻿// Fill out your copyright notice in the Description page of Project Settings.
 
+#include "ATower.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/SphereComponent.h"
 #include "Components/ArrowComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "IEnemyMarker.h"
-#include "ATower.h"
+
 
 
 AATower::AATower()
@@ -43,7 +44,7 @@ void AATower::Tick(float DeltaTime)
 void AATower::DetectionRangeOverlapStart(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (OtherActor->Implements<IIEnemyMarker>())
+	if (OtherActor && OtherActor->GetClass()->ImplementsInterface(UIEnemyMarker::StaticClass()))
     {
         EnemiesInRange.Add(OtherActor);
     }
@@ -52,7 +53,7 @@ void AATower::DetectionRangeOverlapStart(UPrimitiveComponent* OverlappedComponen
 void AATower::DetectionRangeOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-	if (OtherActor->Implements<IIEnemyMarker>()) // This is how C++ handles the "DoesImplementInterface" node, very neat.
+	if (OtherActor && OtherActor->GetClass()->ImplementsInterface(UIEnemyMarker::StaticClass())) // This is how C++ handles the "DoesImplementInterface" node, very neat.
     {
         EnemiesInRange.Remove(OtherActor);
     }
