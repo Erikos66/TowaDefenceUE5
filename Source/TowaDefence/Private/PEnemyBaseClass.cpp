@@ -11,6 +11,10 @@ APEnemyBaseClass::APEnemyBaseClass()
 
 }
 
+void APEnemyBaseClass::MarkAsEnemy()
+{
+}
+
 // Called when the game starts or when spawned
 void APEnemyBaseClass::BeginPlay()
 {
