@@ -6,11 +6,15 @@
 #include "AHexTile.generated.h"
 
 UCLASS()
+
 class TOWADEFENCE_API AHexTile : public AActor
 {
 	GENERATED_BODY()
 
 public:
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Hex Tile")
+	UStaticMeshComponent* HexMesh;
 	
 	AHexTile();
 
