@@ -1,38 +1,100 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "PEnemyBaseClass.h"
+#include "Components/StaticMeshComponent.h"
+#include "Components/ArrowComponent.h"
+#include "Components/SplineComponent.h"
 
-// Sets default values
+
+
+
 APEnemyBaseClass::APEnemyBaseClass()
 {
- 	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	EnemyMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("EnemyMesh"));
+	RootComponent = EnemyMesh;
+
+	ArrowComponent = CreateDefaultSubobject<UArrowComponent>(TEXT("ArrowComponent"));
+	ArrowComponent->SetupAttachment(RootComponent);
 }
 
 void APEnemyBaseClass::MarkAsEnemy()
 {
-}
-
-// Called when the game starts or when spawned
-void APEnemyBaseClass::BeginPlay()
-{
-	Super::BeginPlay();
 	
 }
 
-// Called every frame
+void APEnemyBaseClass::SetSplineReference(USplineComponent* Spline)
+{
+	SplineReference = Spline;
+}
+
+void APEnemyBaseClass::BeginPlay()
+{
+	Super::BeginPlay();
+	UE_LOG(LogTemp, Log, TEXT("An Enemy has Spawned!"));
+}
+
 void APEnemyBaseClass::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	MoveAlongSpline(DeltaTime);
 }
 
-// Called to bind functionality to input
-void APEnemyBaseClass::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+void APEnemyBaseClass::ApplyDamage(float const DamageAmount)
 {
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
+	// Reduce the health by the damage amount
+	Health -= DamageAmount;
 
+	// Clamp health to ensure it doesn't go below 0
+	Health = FMath::Clamp(Health, 0.0f, MaxHealth);
+
+	// Debug message
+	UE_LOG(LogTemp, Log, TEXT("%s took %f damage. Remaining Health: %f"), *GetName(), DamageAmount, Health);
+
+	// Check if the enemy is dead
+	if (Health <= 0.0f)
+	{
+		// Handle death
+		UE_LOG(LogTemp, Log, TEXT("%s has been destroyed!"), *GetName());
+		Die();
+	}
 }
+
+void APEnemyBaseClass::Die()
+{
+	Destroy();
+}
+
+void APEnemyBaseClass::MoveAlongSpline(float const DeltaTime)
+{
+	if (SplineReference)
+	{
+		// Update the progress along the spline
+		SplineProgress += (MovementSpeed * DeltaTime) / SplineReference->GetSplineLength();
+
+		// Clamp progress to ensure it doesn't exceed 1.0
+		SplineProgress = FMath::Clamp(SplineProgress, 0.0f, 1.0f);
+
+		// Move the enemy along the spline
+		FVector NewLocation = SplineReference->GetLocationAtTime(SplineProgress, ESplineCoordinateSpace::World);
+		FRotator NewRotation = SplineReference->GetRotationAtTime(SplineProgress, ESplineCoordinateSpace::World);
+
+		SetActorLocationAndRotation(NewLocation, NewRotation);
+
+		// Check if the enemy has reached the end of the spline
+		if (SplineProgress >= 1.0f)
+		{
+			// Handle reaching the goal
+			Destroy(); // Or call a custom goal-handling function
+		}
+	}
+}
+
+
+void APEnemyBaseClass::OnReachGoal()
+{
+	// Logic for reaching the goal (e.g., damage the player's base)
+	Destroy(); // Destroy the enemy for now
+}
+
 
