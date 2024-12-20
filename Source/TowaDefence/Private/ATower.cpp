@@ -53,9 +53,7 @@ void AATower::DetectionRangeOverlapStart(UPrimitiveComponent* OverlappedComponen
 void AATower::DetectionRangeOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-	if (OtherActor && OtherActor->GetClass()->ImplementsInterface(UEnemyMarker::StaticClass())) // This is how C++ 
-	// handles the 
-	// "DoesImplementInterface" node, very neat.
+	if (OtherActor && OtherActor->GetClass()->ImplementsInterface(UEnemyMarker::StaticClass()))
     {
         EnemiesInRange.Remove(OtherActor);
     }
