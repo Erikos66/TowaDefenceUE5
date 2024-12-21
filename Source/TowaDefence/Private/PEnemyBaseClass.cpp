@@ -1,6 +1,5 @@
 #include "PEnemyBaseClass.h"
 #include "Components/StaticMeshComponent.h"
-#include "Components/ArrowComponent.h"
 #include "Components/SplineComponent.h"
 
 
@@ -12,9 +11,6 @@ APEnemyBaseClass::APEnemyBaseClass()
 
 	EnemyMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("EnemyMesh"));
 	RootComponent = EnemyMesh;
-
-	ArrowComponent = CreateDefaultSubobject<UArrowComponent>(TEXT("ArrowComponent"));
-	ArrowComponent->SetupAttachment(RootComponent);
 }
 
 void APEnemyBaseClass::MarkAsEnemy()
@@ -89,12 +85,3 @@ void APEnemyBaseClass::MoveAlongSpline(float const DeltaTime)
 		}
 	}
 }
-
-
-void APEnemyBaseClass::OnReachGoal()
-{
-	// Logic for reaching the goal (e.g., damage the player's base)
-	Destroy(); // Destroy the enemy for now
-}
-
-

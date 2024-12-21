@@ -6,7 +6,6 @@
 #include "PEnemyBaseClass.generated.h"
 
 class UStaticMeshComponent;
-class UArrowComponent;
 class USplineComponent;
 
 UCLASS()
@@ -23,9 +22,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Enemy|Vars")
 	UStaticMeshComponent* EnemyMesh;
 
-	UPROPERTY(BlueprintReadWrite, Category = "Enemy|Vars")
-	UArrowComponent* ArrowComponent;
-
 	UPROPERTY(BlueprintReadWrite, Category = "Enemy|Stats")
 	float Health = 10.0f;
 
@@ -33,7 +29,7 @@ public:
 	float MaxHealth = 10.0f;
 
 	UPROPERTY(BlueprintReadWrite, Category = "Enemy|Movement")
-	float MovementSpeed = 0.5f;
+	float MovementSpeed = 5.0f;
 
 	UPROPERTY(BlueprintReadWrite, Category = "Enemy|Wave")
 	int32 WaveNumber;
@@ -83,9 +79,6 @@ protected:
 
 	UFUNCTION(BlueprintCallable, Category = "Enemy|Movement")
 	virtual void MoveAlongSpline(float DeltaTime);
-
-	UFUNCTION(BlueprintCallable, Category = "Enemy|Movement")
-	virtual void OnReachGoal();
 
 private:
 

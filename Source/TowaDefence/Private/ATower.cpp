@@ -3,7 +3,6 @@
 #include "ATower.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/SphereComponent.h"
-#include "Components/ArrowComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "IEnemyMarker.h"
 
@@ -23,9 +22,6 @@ AATower::AATower()
 	CollisionSphere->OnComponentBeginOverlap.AddDynamic(this, &AATower::DetectionRangeOverlapStart);
 	CollisionSphere->OnComponentEndOverlap.AddDynamic(this, &AATower::DetectionRangeOverlapEnd);
 	// Very cool that collision is handled this way in C++, your able to even bind it to its own named function, or multiple!
-
-	ArrowComponent = CreateDefaultSubobject<UArrowComponent>(TEXT("ArrowComponent"));
-	ArrowComponent->SetupAttachment(RootComponent);
 }
 void AATower::BeginPlay()
 {

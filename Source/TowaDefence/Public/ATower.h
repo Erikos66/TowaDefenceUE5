@@ -7,7 +7,6 @@
 
 class UStaticMeshComponent;
 class USphereComponent;
-class UArrowComponent;
 
 UCLASS()
 class TOWADEFENCE_API AATower : public AActor
@@ -37,9 +36,6 @@ protected:
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 	UPROPERTY(BlueprintReadWrite, Category = "Tower")
-	UArrowComponent* ArrowComponent;
-
-	UPROPERTY(BlueprintReadWrite, Category = "Tower")
 	float CurrentHealth = 10.0f;
 
 	UPROPERTY(BlueprintReadWrite, Category = "Tower")
@@ -52,7 +48,7 @@ protected:
 	float AttackSpeed = 1.0f;
 
 	UPROPERTY(BlueprintReadWrite, Category = "Tower")
-	float AttackRange = 500.0f;
+	float AttackRange = 200.0f;
 
 	UPROPERTY(BlueprintReadWrite, Category = "Tower")
 	float RotationSpeed = 10.0f;
