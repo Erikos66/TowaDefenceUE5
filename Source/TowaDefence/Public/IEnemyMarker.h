@@ -18,4 +18,6 @@ class TOWADEFENCE_API IEnemyMarker
 public:
 	// Define any interface functions here
 	virtual void MarkAsEnemy() = 0;
+
+	virtual void ApplyDamage(float DamageAmount) = 0;
 };
