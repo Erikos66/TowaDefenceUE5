@@ -7,6 +7,12 @@
 - **Boss Enemies**
 - **Arc Turrets**
 - **Art Turrets?**
+- **Shotgun Turrets**
+- **Background Changes to Music Beat**
+- **Enemies Breathe to Music Beat**
+- **Turrets wiggle to Music Beat**
+- **Squall Tower?**
+- **Magnetic Field Sticker Tower**
 
 ---
 

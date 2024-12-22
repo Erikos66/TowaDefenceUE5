@@ -1,6 +1,8 @@
 ﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
+#include <ThirdParty/ICU/icu4c-64_1/include/unicode/putil.h>
+
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "ATower.generated.h"
@@ -70,6 +72,9 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Targeting")
 	TArray <AActor*> EnemiesInRange;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tower")
+	bool BCanBeTower = false;
 	
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	// FUNCTIONS
