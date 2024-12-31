@@ -22,12 +22,10 @@ public:
 	AHexTile();
 
 	virtual void Tick(float DeltaTime) override;
-
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Hex Tile")
 	EHexTileType TileType;
-
-	virtual void OnTileSelected();
-
+	
 protected:
 	virtual void BeginPlay() override;
 };
