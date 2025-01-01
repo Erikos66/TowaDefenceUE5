@@ -13,6 +13,11 @@ APEnemyBaseClass::APEnemyBaseClass()
 	RootComponent = EnemyMesh;
 }
 
+void APEnemyBaseClass::MarkAsEnemy()
+{
+	
+}
+
 void APEnemyBaseClass::SetSplineReference(USplineComponent* Spline)
 {
 	SplineReference = Spline;

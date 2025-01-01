@@ -2,13 +2,15 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
+#include "IEnemyMarker.h"
 #include "PEnemyBaseClass.generated.h"
+
 
 class UStaticMeshComponent;
 class USplineComponent;
 
 UCLASS()
-class TOWADEFENCE_API APEnemyBaseClass : public APawn
+class TOWADEFENCE_API APEnemyBaseClass : public APawn, public IEnemyMarker
 {
 	GENERATED_BODY()
 
@@ -46,6 +48,8 @@ public:
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 	APEnemyBaseClass();
+
+	virtual void MarkAsEnemy() override;
 	
 	// Set the spline reference
 	UFUNCTION(BlueprintCallable, Category = "Enemy|Movement")
