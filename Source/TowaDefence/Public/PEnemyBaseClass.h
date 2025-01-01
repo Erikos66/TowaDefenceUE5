@@ -1,9 +1,10 @@
 #pragma once
 
-#include "IEnemyMarker.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
+#include "IEnemyMarker.h"
 #include "PEnemyBaseClass.generated.h"
+
 
 class UStaticMeshComponent;
 class USplineComponent;
@@ -23,10 +24,10 @@ public:
 	UStaticMeshComponent* EnemyMesh;
 
 	UPROPERTY(BlueprintReadWrite, Category = "Enemy|Stats")
-	float Health = 10.0f;
+	float Health = 1.0f;
 
 	UPROPERTY(BlueprintReadWrite, Category = "Enemy|Stats")
-	float MaxHealth = 10.0f;
+	float MaxHealth = 1.0f;
 
 	UPROPERTY(BlueprintReadWrite, Category = "Enemy|Movement")
 	float MovementSpeed = 5.0f;
@@ -48,12 +49,8 @@ public:
 
 	APEnemyBaseClass();
 
-	UFUNCTION(BlueprintCallable, Category = "EnemyFunctions")
 	virtual void MarkAsEnemy() override;
-
-	UFUNCTION(BlueprintCallable, Category = "EnemyFunctions")
-	virtual void ApplyDamage(float DamageAmount) override;
-
+	
 	// Set the spline reference
 	UFUNCTION(BlueprintCallable, Category = "Enemy|Movement")
 	void SetSplineReference(USplineComponent* Spline);

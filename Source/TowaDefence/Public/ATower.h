@@ -70,12 +70,23 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Targeting")
 	TArray <AActor*> EnemiesInRange;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Tower|Combat")
+	TSubclassOf<class AAProjectile> ProjectileClass;
+
+	FTimerHandle FireRateTimerHandle;
 	
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	// FUNCTIONS
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 	AATower();
+
+	void FireAtEnemy();
+	
+	void StartFiring();
+
+	void StopFiring();
 
 	virtual void BeginPlay() override;
 

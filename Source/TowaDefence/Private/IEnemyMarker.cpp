@@ -2,6 +2,3 @@
 
 
 #include "IEnemyMarker.h"
-
-
-// Add default functionality here for any IIEnemyMarker functions that are not pure virtual.
