@@ -15,16 +15,17 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Hex Tile")
 	UStaticMeshComponent* HexMesh;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Hex Tile")
+	bool bCanBeTower = true;
 	
 	AHexTile();
 
 	virtual void Tick(float DeltaTime) override;
-
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Hex Tile")
 	EHexTileType TileType;
-
-	virtual void OnTileSelected(); // Polymorphic function for interactions
-
+	
 protected:
 	virtual void BeginPlay() override;
 };

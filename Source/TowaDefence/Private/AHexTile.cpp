@@ -3,23 +3,20 @@
 
 AHexTile::AHexTile()
 {
-	PrimaryActorTick.bCanEverTick = false;
+    PrimaryActorTick.bCanEverTick = false;
 
-	HexMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("HexMesh"));
-	RootComponent = HexMesh;
-}
-
-void AHexTile::BeginPlay()
-{
-	Super::BeginPlay();
+    HexMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("HexMesh"));
+    RootComponent = HexMesh;
 }
 
 void AHexTile::Tick(float DeltaTime)
 {
-	Super::Tick(DeltaTime);
+    Super::Tick(DeltaTime);
 }
 
-void AHexTile::OnTileSelected()
+void AHexTile::BeginPlay()
 {
-	UE_LOG(LogTemp, Log, TEXT("Base Hex Tile Selected"));
+    Super::BeginPlay();
+    
 }
+    
