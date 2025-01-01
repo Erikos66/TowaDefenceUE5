@@ -13,11 +13,6 @@ APEnemyBaseClass::APEnemyBaseClass()
 	RootComponent = EnemyMesh;
 }
 
-void APEnemyBaseClass::MarkAsEnemy()
-{
-	
-}
-
 void APEnemyBaseClass::SetSplineReference(USplineComponent* Spline)
 {
 	SplineReference = Spline;
@@ -34,26 +29,6 @@ void APEnemyBaseClass::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	MoveAlongSpline(DeltaTime);
-}
-
-void APEnemyBaseClass::ApplyDamage(float const DamageAmount)
-{
-	// Reduce the health by the damage amount
-	Health -= DamageAmount;
-
-	// Clamp health to ensure it doesn't go below 0
-	Health = FMath::Clamp(Health, 0.0f, MaxHealth);
-
-	// Debug message
-	UE_LOG(LogTemp, Log, TEXT("%s took %f damage. Remaining Health: %f"), *GetName(), DamageAmount, Health);
-
-	// Check if the enemy is dead
-	if (Health <= 0.0f)
-	{
-		// Handle death
-		UE_LOG(LogTemp, Log, TEXT("%s has been destroyed!"), *GetName());
-		Die();
-	}
 }
 
 void APEnemyBaseClass::Die()

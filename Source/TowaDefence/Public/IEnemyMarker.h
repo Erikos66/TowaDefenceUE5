@@ -19,5 +19,5 @@ public:
 	// Define any interface functions here
 	virtual void MarkAsEnemy() = 0;
 
-	virtual void ApplyDamage(float DamageAmount) = 0;
+	virtual float GetHealth() const = 0;
 };
