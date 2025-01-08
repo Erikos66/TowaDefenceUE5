@@ -3,7 +3,7 @@
 ## Ideas
 
 - **Buff Turrets**
-- **Multiple Tile'd Turrets**
+- **Multiple Tiled Turrets**
 - **Boss Enemies**
 - **Arc Turrets**
 - **Art Turrets?**
@@ -28,7 +28,7 @@
 - **Levels**
 
 - **Energy For Currency**
- - Base produces enery at the end of each wave
+ - Base produces energy at the end of each wave
  - Passive energy generation towers that require user input to collect from
  - Active energy generation towers that gain energy when an enemy dies within it's range
 
